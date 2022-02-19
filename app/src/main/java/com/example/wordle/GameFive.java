@@ -1,10 +1,13 @@
 package com.example.wordle;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,18 +20,25 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class GameFive extends Fragment implements View.OnClickListener{
 
     private View binding;
     private TextView[][] fields = new TextView[6][5];
-    private HashMap<String, Button> buttons = new HashMap();
+    private HashMap<Character, Button> buttons = new HashMap<Character, Button>();
     private int row = 0;
     private int column = 0;
     private Engine engine = new Engine(5);
     private View popupView;
     private PopupWindow popupError;
+    private View popupWinView;
+    private PopupWindow popupWin;
+    private View popupLoseView;
+    private PopupWindow popupLose;
+    private Boolean end = false;
+
 
     public GameFive() {
 
@@ -38,6 +48,8 @@ public class GameFive extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         popupView = inflater.inflate(R.layout.pop_up, null);
+        popupWinView = inflater.inflate(R.layout.popup_win, null);
+        popupLoseView = inflater.inflate(R.layout.popup_lose, null);
         return inflater.inflate(R.layout.fragment_game_five, container, false);
     }
 
@@ -48,12 +60,14 @@ public class GameFive extends Fragment implements View.OnClickListener{
 
         binding.findViewById(R.id.enter).setOnClickListener(this);
         binding.findViewById(R.id.delete).setOnClickListener(this);
+        binding.findViewById(R.id.refresh).setOnClickListener(this);
+        binding.findViewById(R.id.back).setOnClickListener(this);
 
         setButtons();
         setFields();
         row = 0;
         column = 0;
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
 
         boolean focusable = true;
@@ -65,44 +79,60 @@ public class GameFive extends Fragment implements View.OnClickListener{
                 return true;
             }
         });
+        popupWin = new PopupWindow(popupWinView, width, height, focusable);
+        popupWinView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWin.dismiss();
+                return true;
+            }
+        });
+        popupLose = new PopupWindow(popupLoseView, width, height, focusable);
+        popupLoseView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupLose.dismiss();
+                return true;
+            }
+        });
     }
 
     private void setButtons () {
-        buttons.put("q", (Button) binding.findViewById(R.id.q));
-        buttons.put("w", (Button) binding.findViewById(R.id.w));
-        buttons.put("e", (Button) binding.findViewById(R.id.e));
-        buttons.put("r", (Button) binding.findViewById(R.id.r));
-        buttons.put("t", (Button) binding.findViewById(R.id.t));
-        buttons.put("y", (Button) binding.findViewById(R.id.y));
-        buttons.put("u", (Button) binding.findViewById(R.id.u));
-        buttons.put("i", (Button) binding.findViewById(R.id.i));
-        buttons.put("o", (Button) binding.findViewById(R.id.o));
-        buttons.put("p", (Button) binding.findViewById(R.id.p));
-        buttons.put("a", (Button) binding.findViewById(R.id.a));
-        buttons.put("s", (Button) binding.findViewById(R.id.s));
-        buttons.put("d", (Button) binding.findViewById(R.id.d));
-        buttons.put("f", (Button) binding.findViewById(R.id.f));
-        buttons.put("g", (Button) binding.findViewById(R.id.g));
-        buttons.put("h", (Button) binding.findViewById(R.id.h));
-        buttons.put("j", (Button) binding.findViewById(R.id.j));
-        buttons.put("k", (Button) binding.findViewById(R.id.k));
-        buttons.put("l", (Button) binding.findViewById(R.id.l));
-        buttons.put("z", (Button) binding.findViewById(R.id.z));
-        buttons.put("x", (Button) binding.findViewById(R.id.x));
-        buttons.put("c", (Button) binding.findViewById(R.id.c));
-        buttons.put("v", (Button) binding.findViewById(R.id.v));
-        buttons.put("b", (Button) binding.findViewById(R.id.b));
-        buttons.put("n", (Button) binding.findViewById(R.id.n));
-        buttons.put("m", (Button) binding.findViewById(R.id.m));
-        buttons.put("ą", (Button) binding.findViewById(R.id.ą));
-        buttons.put("ć", (Button) binding.findViewById(R.id.ć));
-        buttons.put("ę", (Button) binding.findViewById(R.id.ę));
-        buttons.put("ł", (Button) binding.findViewById(R.id.ł));
-        buttons.put("ó", (Button) binding.findViewById(R.id.ó));
-        buttons.put("ś", (Button) binding.findViewById(R.id.ś));
-        buttons.put("ń", (Button) binding.findViewById(R.id.ń));
-        buttons.put("ż", (Button) binding.findViewById(R.id.ż));
-        buttons.put("ź", (Button) binding.findViewById(R.id.ź));
+        buttons.put('q', (Button) binding.findViewById(R.id.q));
+        buttons.put('w', (Button) binding.findViewById(R.id.w));
+        buttons.put('e', (Button) binding.findViewById(R.id.e));
+        buttons.put('r', (Button) binding.findViewById(R.id.r));
+        buttons.put('t', (Button) binding.findViewById(R.id.t));
+        buttons.put('y', (Button) binding.findViewById(R.id.y));
+        buttons.put('u', (Button) binding.findViewById(R.id.u));
+        buttons.put('i', (Button) binding.findViewById(R.id.i));
+        buttons.put('o', (Button) binding.findViewById(R.id.o));
+        buttons.put('p', (Button) binding.findViewById(R.id.p));
+        buttons.put('a', (Button) binding.findViewById(R.id.a));
+        buttons.put('s', (Button) binding.findViewById(R.id.s));
+        buttons.put('d', (Button) binding.findViewById(R.id.d));
+        buttons.put('f', (Button) binding.findViewById(R.id.f));
+        buttons.put('g', (Button) binding.findViewById(R.id.g));
+        buttons.put('h', (Button) binding.findViewById(R.id.h));
+        buttons.put('j', (Button) binding.findViewById(R.id.j));
+        buttons.put('k', (Button) binding.findViewById(R.id.k));
+        buttons.put('l', (Button) binding.findViewById(R.id.l));
+        buttons.put('z', (Button) binding.findViewById(R.id.z));
+        buttons.put('x', (Button) binding.findViewById(R.id.x));
+        buttons.put('c', (Button) binding.findViewById(R.id.c));
+        buttons.put('v', (Button) binding.findViewById(R.id.v));
+        buttons.put('b', (Button) binding.findViewById(R.id.b));
+        buttons.put('n', (Button) binding.findViewById(R.id.n));
+        buttons.put('m', (Button) binding.findViewById(R.id.m));
+        buttons.put('ą', (Button) binding.findViewById(R.id.ą));
+        buttons.put('ć', (Button) binding.findViewById(R.id.ć));
+        buttons.put('ę', (Button) binding.findViewById(R.id.ę));
+        buttons.put('ł', (Button) binding.findViewById(R.id.ł));
+        buttons.put('ó', (Button) binding.findViewById(R.id.ó));
+        buttons.put('ś', (Button) binding.findViewById(R.id.ś));
+        buttons.put('ń', (Button) binding.findViewById(R.id.ń));
+        buttons.put('ż', (Button) binding.findViewById(R.id.ż));
+        buttons.put('ź', (Button) binding.findViewById(R.id.ź));
 
         for (Button butt: buttons.values()) {
             butt.setOnClickListener(this);
@@ -155,18 +185,26 @@ public class GameFive extends Fragment implements View.OnClickListener{
             if (row < 6 && column == 5) {
                 String word = "";
                 for (int i = 0; i < 5; i++)
-                    word += fields[column][i].getText().toString();
-                if (engine.evaluateLine(word)) {
-                    int[] line = engine.getLine();
-                    HashMap map = engine.getAlphabet();
-                    markLine (line);
-                    markLetters (map);
-                    column += 1;
-                    row = 0;
+                    word += fields[row][i].getText().toString();
+                if (engine.evaluateLine(word.toLowerCase())) {
+                    markLetters (engine.getAlphabet());
+                    markLine (engine.getLine());
+                    column = 0;
+                    row += 1;
                 }
                 else {
                     popupError.showAtLocation(binding, Gravity.TOP, 0, 0);
                 }
+            }
+            if (engine.checkWin()) {
+                popupWin.showAtLocation(binding, Gravity.CENTER, 0, 0);
+                view.setClickable(false);
+                end = true;
+            }
+            else if (row == 6) {
+                popupLose.showAtLocation(binding, Gravity.CENTER, 0, 0);
+                view.setClickable(false);
+                end = true;
             }
         }
         else if (name.equals("delete")) {
@@ -175,19 +213,50 @@ public class GameFive extends Fragment implements View.OnClickListener{
                 fields[row][column].setText("");
             }
         }
+        else if (name.equals("refresh")) {
+            NavHostFragment.findNavController(GameFive.this)
+                    .navigate(R.id.action_gameFive_self);
+        }
+        else if (name.equals("back")) {
+            NavHostFragment.findNavController(GameFive.this)
+                    .navigate(R.id.action_gameFive_to_mainFragment);
+        }
         else {
-            if (row < 6 && column < 5) {
+            if ((!end) && row < 6 && column < 5) {
                 fields[row][column].setText(name.toUpperCase());
                 column += 1;
             }
         }
     }
 
-    private void markLetters(HashMap map) {
-        //to do
+    private void markLetters(HashMap<Character, Integer> map) {
+        for(Map.Entry<Character, Integer> entry: map.entrySet()) {
+            Character letter = entry.getKey();
+            Integer value = entry.getValue();
+            if (value == 1) {
+                buttons.get(letter).setBackgroundColor(Color.parseColor("#333333"));
+            }
+            else if (value == 2) {
+                buttons.get(letter).setBackgroundColor(Color.parseColor("#DBC500"));
+            }
+            else if (value == 3) {
+                buttons.get(letter).setBackgroundColor(Color.parseColor("#339237"));
+            }
+        }
     }
 
     private void markLine(int[] line) {
-        //do it
+        for (int i = 0; i < 5; i++) {
+            int value = line[i];
+            if (value == 1) {
+                fields[row][i].setBackground(getResources().getDrawable(R.drawable.black_field));
+            }
+            else if (value == 2) {
+                fields[row][i].setBackground(getResources().getDrawable(R.drawable.yellow_field));
+            }
+            else if (value == 3) {
+                fields[row][i].setBackground(getResources().getDrawable(R.drawable.green_field));
+            }
+        }
     }
 }

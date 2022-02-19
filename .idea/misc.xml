@@ -13,6 +13,8 @@
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/layout/fragment_main1.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/layout/pop_up.xml" value="0.17426545086119555" />
+        <entry key="app/src/main/res/layout/popup_lose.xml" value="0.25769927536231885" />
+        <entry key="app/src/main/res/layout/popup_win.xml" value="0.25769927536231885" />
       </map>
     </option>
   </component>

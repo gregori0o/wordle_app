@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_gameFive_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_gameFive_self"
+            app:destination="@id/gameFive" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"

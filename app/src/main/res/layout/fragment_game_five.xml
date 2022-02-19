@@ -7,6 +7,18 @@
     android:background="#333333"
     tools:context=".GameFive">
 
+    <Button
+        android:id="@+id/back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#202020"
+        android:foreground="?attr/actionModeCloseDrawable"
+        android:foregroundTint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TableLayout
         android:id="@+id/fields"
         android:layout_width="0dp"
@@ -995,4 +1007,15 @@
         </TableRow>
 
     </TableLayout>
+
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#202020"
+        android:foreground="@android:drawable/stat_notify_sync_noanim"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
