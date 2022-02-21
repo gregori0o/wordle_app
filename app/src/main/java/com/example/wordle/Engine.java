@@ -1,5 +1,7 @@
 package com.example.wordle;
 
+import android.content.Context;
+
 import java.util.HashMap;
 
 public class Engine {
@@ -9,8 +11,8 @@ public class Engine {
     private HashMap<Character, Integer> alphabet;
     private final String letters = "qwertyuiopasdfghjklzxcvbnmąćęłóśńżź";
 
-    public Engine (int length) {
-        library = new Library(length);
+    public Engine (Context c, int length) {
+        library = new Library(c, length);
         line = new int[length];
         alphabet = new HashMap<Character, Integer>();
         for (Character ch: letters.toCharArray()) {

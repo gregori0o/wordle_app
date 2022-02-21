@@ -30,7 +30,7 @@ public class GameFive extends Fragment implements View.OnClickListener{
     private HashMap<Character, Button> buttons = new HashMap<Character, Button>();
     private int row = 0;
     private int column = 0;
-    private Engine engine = new Engine(5);
+    private Engine engine;
     private View popupView;
     private PopupWindow popupError;
     private View popupWinView;
@@ -56,6 +56,9 @@ public class GameFive extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        engine = new Engine(this.getContext(), 5);
+
         binding = view;
 
         binding.findViewById(R.id.enter).setOnClickListener(this);
