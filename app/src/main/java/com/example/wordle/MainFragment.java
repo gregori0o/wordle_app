@@ -31,19 +31,26 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         binding = view;
         binding.findViewById(R.id.button_5).setOnClickListener(this);
         binding.findViewById(R.id.button_6).setOnClickListener(this);
+        binding.findViewById(R.id.button_9).setOnClickListener(this);
+        binding.findViewById(R.id.button_in).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        System.out.println(view.getId());
-        String name = getResources().getResourceEntryName(view.getId());
-        System.out.println(name);
-        if (view == binding.findViewById(R.id.button_5)) {
+        String name = (String) getResources().getResourceEntryName(view.getId());
+        if (name.equals("button_5")) {
             NavHostFragment.findNavController(MainFragment.this)
                     .navigate(R.id.action_mainFragment_to_gameFive);
         }
-        else if (view == binding.findViewById(R.id.button_6)) {
+        else if (name.equals("button_6")) {
             view.setBackgroundColor(10);
+        }
+        else if (name.equals("button_9")) {
+            view.setBackgroundColor(10);
+        }
+        else if (name.equals("button_in")) {
+            NavHostFragment.findNavController(MainFragment.this)
+                    .navigate(R.id.action_mainFragment_to_instructionFragment);
         }
     }
 }

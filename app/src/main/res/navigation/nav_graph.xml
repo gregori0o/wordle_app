@@ -24,5 +24,16 @@
         <action
             android:id="@+id/action_mainFragment_to_gameFive"
             app:destination="@id/gameFive" />
+        <action
+            android:id="@+id/action_mainFragment_to_instructionFragment"
+            app:destination="@id/instructionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/instructionFragment"
+        android:name="com.example.wordle.InstructionFragment"
+        android:label="InstructionFragment" >
+        <action
+            android:id="@+id/action_instructionFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

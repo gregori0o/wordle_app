@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#333333"
+    tools:context=".GameFive">
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#202020"
+        android:foreground="?attr/actionModeCloseDrawable"
+        android:foregroundTint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/instruction"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="1dp"
+        android:text="Twoim zadaniem jest odgadnięcie słowa! \nWpisz dowolne słowo i naciśnij enter aby sprawdzić czy zgadłeś. \n\nPo każdej próbie litery zostaną odpowiednio zaznaczone: \nKolor zielony oznacza, że litera występuje w haśle w tym samym miejscu. \nKolor żółty to znak, że litera ta występuje w haśle lecz na innej pozycji. \nKolor czarny oznacza, że litera ta nie występuje w odgadywanym haśle. \n\n\n\nW aplikacji masz do wyboru słowa 5, 6 i 9 literowe. Na odgadnięcie masz 6 lub 7 (9 - literowe hasło) prób. Przyciśnięcie przycisku restart (dwie starzłki ułożone w okrąg) powoduje wylosowanie nowego hasła. \n\n\n MIŁEJ ZABAWY!!! \n\n\n\n Inspirowane grą Wordly."
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

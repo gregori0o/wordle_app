@@ -27,8 +27,9 @@
     <Button
         android:id="@+id/button_5"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="132dp"
+        android:backgroundTint="#000000"
         android:clickable="true"
         android:text="5 liter"
         android:textColor="#FBC02D"
@@ -40,14 +41,40 @@
     <Button
         android:id="@+id/button_6"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:clickable="true"
         android:text="6 liter"
+        android:backgroundTint="#000000"
         android:textColor="#FBC02D"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_5" />
+
+    <Button
+        android:id="@+id/button_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="9 liter"
+        android:backgroundTint="#000000"
+        android:textColor="#FBC02D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_6" />
+
+    <Button
+        android:id="@+id/button_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Instrukcja"
+        android:backgroundTint="#000000"
+        android:textColor="#FBC02D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
