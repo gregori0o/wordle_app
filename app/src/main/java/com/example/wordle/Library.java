@@ -13,7 +13,7 @@ import java.util.Set;
 public class Library {
 
     private final int length;
-    private final String word;
+    private String word;
     private Set<String> full_lib = new HashSet<String>();
     private ArrayList<String> plain_lib = new ArrayList<String>();
     private Context context;
@@ -76,6 +76,10 @@ public class Library {
 
     public String getWord () {
         return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
     }
 
     public Boolean checkWord (String word) {

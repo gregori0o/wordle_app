@@ -56,7 +56,7 @@ public class GameFive extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        engine = new Engine(this.getContext(), 5);
+        engine = new Engine(getContext(), 5);
 
         binding = view;
 
@@ -97,6 +97,15 @@ public class GameFive extends Fragment implements View.OnClickListener{
                 return true;
             }
         });
+
+        while (engine.isLine()) {
+            String word = engine.getLineWord();
+            for (int i = 0; i < 5; i++)
+                fields[row][i].setText(word.substring(i, i+1).toUpperCase());
+            markLine (engine.getLine());
+            row += 1;
+        }
+        markLetters(engine.getAlphabet());
     }
 
     private void setButtons () {
@@ -188,7 +197,7 @@ public class GameFive extends Fragment implements View.OnClickListener{
                 String word = "";
                 for (int i = 0; i < 5; i++)
                     word += fields[row][i].getText().toString();
-                if (engine.evaluateLine(word.toLowerCase())) {
+                if (engine.loadWord(word.toLowerCase())) {
                     markLetters (engine.getAlphabet());
                     markLine (engine.getLine());
                     column = 0;
@@ -199,11 +208,13 @@ public class GameFive extends Fragment implements View.OnClickListener{
                 }
             }
             if (engine.checkWin()) {
+                engine.endGame();
                 popupWin.showAtLocation(binding, Gravity.CENTER, 0, 0);
                 view.setClickable(false);
                 end = true;
             }
             else if (row == 6) {
+                engine.endGame();
                 popupLose.showAtLocation(binding, Gravity.CENTER, 0, 0);
                 view.setClickable(false);
                 end = true;
@@ -216,6 +227,7 @@ public class GameFive extends Fragment implements View.OnClickListener{
             }
         }
         else if (name.equals("refresh")) {
+            engine.endGame();
             NavHostFragment.findNavController(GameFive.this)
                     .navigate(R.id.action_gameFive_self);
         }
