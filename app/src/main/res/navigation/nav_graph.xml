@@ -27,6 +27,12 @@
         <action
             android:id="@+id/action_mainFragment_to_instructionFragment"
             app:destination="@id/instructionFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_gameSix"
+            app:destination="@id/gameSix" />
+        <action
+            android:id="@+id/action_mainFragment_to_gameNine"
+            app:destination="@id/gameNine" />
     </fragment>
     <fragment
         android:id="@+id/instructionFragment"
@@ -35,5 +41,29 @@
         <action
             android:id="@+id/action_instructionFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameSix"
+        android:name="com.example.wordle.GameSix"
+        android:label="fragment_game_six"
+        tools:layout="@layout/fragment_game_six" >
+        <action
+            android:id="@+id/action_gameSix_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_gameSix_self"
+            app:destination="@id/gameSix" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameNine"
+        android:name="com.example.wordle.GameNine"
+        android:label="fragment_game_nine"
+        tools:layout="@layout/fragment_game_nine" >
+        <action
+            android:id="@+id/action_gameNine_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_gameNine_self"
+            app:destination="@id/gameNine" />
     </fragment>
 </navigation>

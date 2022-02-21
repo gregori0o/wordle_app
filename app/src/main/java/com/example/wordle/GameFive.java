@@ -37,6 +37,7 @@ public class GameFive extends Fragment implements View.OnClickListener{
     private View popupLoseView;
     private PopupWindow popupLose;
     private Boolean end = false;
+    private final int size = 5;
 
 
     public GameFive() {
@@ -56,7 +57,7 @@ public class GameFive extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        engine = new Engine(getContext(), 5);
+        engine = new Engine(getContext(), size);
 
         binding = view;
 
@@ -100,7 +101,7 @@ public class GameFive extends Fragment implements View.OnClickListener{
 
         while (engine.isLine()) {
             String word = engine.getLineWord();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < size; i++)
                 fields[row][i].setText(word.substring(i, i+1).toUpperCase());
             markLine (engine.getLine());
             row += 1;
@@ -193,9 +194,9 @@ public class GameFive extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         String name = (String) getResources().getResourceEntryName(view.getId());
         if (name.equals("enter")) {
-            if (row < 6 && column == 5) {
+            if (row < 6 && column == size) {
                 String word = "";
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < size; i++)
                     word += fields[row][i].getText().toString();
                 if (engine.loadWord(word.toLowerCase())) {
                     markLetters (engine.getAlphabet());
@@ -236,7 +237,7 @@ public class GameFive extends Fragment implements View.OnClickListener{
                     .navigate(R.id.action_gameFive_to_mainFragment);
         }
         else {
-            if ((!end) && row < 6 && column < 5) {
+            if ((!end) && row < 6 && column < size) {
                 fields[row][column].setText(name.toUpperCase());
                 column += 1;
             }
@@ -260,7 +261,7 @@ public class GameFive extends Fragment implements View.OnClickListener{
     }
 
     private void markLine(int[] line) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < size; i++) {
             int value = line[i];
             if (value == 1) {
                 fields[row][i].setBackground(getResources().getDrawable(R.drawable.black_field));

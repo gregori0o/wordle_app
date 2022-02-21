@@ -39,7 +39,7 @@ Do zbudowania aplikacji skorzystałem ze słownika udostępnionego na stronie [s
 
 App is based on the well-known web application [Wordle](https://www.nytimes.com/games/wordle/index.html). Why did I write it? Firstly, I wanted to learn writing android app in Java. Secondly, I didn't want to wait all day for a new word. App was created in polish language.
 
-## How use
+## How to use
 
 You have to download compressed version [app/release/app-release.apk](https://github.com/gregori0o/wordle_app/blob/master/app/release/app-release.apk) and install it on your mobile phone.
 

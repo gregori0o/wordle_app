@@ -43,10 +43,12 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                     .navigate(R.id.action_mainFragment_to_gameFive);
         }
         else if (name.equals("button_6")) {
-            view.setBackgroundColor(10);
+            NavHostFragment.findNavController(MainFragment.this)
+                    .navigate(R.id.action_mainFragment_to_gameSix);
         }
         else if (name.equals("button_9")) {
-            view.setBackgroundColor(10);
+            NavHostFragment.findNavController(MainFragment.this)
+                    .navigate(R.id.action_mainFragment_to_gameNine);
         }
         else if (name.equals("button_in")) {
             NavHostFragment.findNavController(MainFragment.this)
