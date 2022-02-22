@@ -160,6 +160,10 @@ public class Engine {
     public void endGame () {
         file.delete();
     }
+
+    public String getWord () {
+        return library.getWord();
+    }
 }
 
 

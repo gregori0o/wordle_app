@@ -70,8 +70,20 @@ public class GameNine extends Fragment implements View.OnClickListener{
         setFields();
         row = 0;
         column = 0;
+
+        while (engine.isLine()) {
+            String word = engine.getLineWord();
+            for (int i = 0; i < size; i++)
+                fields[row][i].setText(word.substring(i, i+1).toUpperCase());
+            markLine (engine.getLine());
+            row += 1;
+        }
+        markLetters(engine.getAlphabet());
+
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        TextView txt = (TextView) popupLoseView.findViewById(R.id.text_lose);
+        txt.setText(txt.getText().toString() + engine.getWord());
 
         boolean focusable = true;
         popupError = new PopupWindow(popupView, width, height, focusable);
@@ -98,15 +110,6 @@ public class GameNine extends Fragment implements View.OnClickListener{
                 return true;
             }
         });
-
-        while (engine.isLine()) {
-            String word = engine.getLineWord();
-            for (int i = 0; i < size; i++)
-                fields[row][i].setText(word.substring(i, i+1).toUpperCase());
-            markLine (engine.getLine());
-            row += 1;
-        }
-        markLetters(engine.getAlphabet());
     }
 
     private void setButtons () {

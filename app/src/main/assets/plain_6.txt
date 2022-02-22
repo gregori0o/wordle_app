@@ -3374,7 +3374,7 @@ intron
 intruz
 intyna
 iperyt
-iPhone
+iphone
 ipomea
 iporka
 iporyt
@@ -3391,7 +3391,7 @@ istota
 itacki
 italik
 itrowy
-iTunes
+itunes
 iwonka
 izaliż
 izbica
@@ -5884,7 +5884,7 @@ newton
 nęcący
 nęczyn
 nędzny
-nForce
+nforce
 niania
 niańka
 nicień
@@ -6011,7 +6011,7 @@ nutria
 nutrie
 nużący
 nużyca
-nVidia
+nvidia
 nylony
 nyżowy
 oazowy
