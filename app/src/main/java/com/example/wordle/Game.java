@@ -264,10 +264,13 @@ public abstract class Game extends Fragment implements View.OnClickListener{
     }
 
     protected void restoreWord () {
+        int width = fields[0][0].getWidth();
         while (engine.isLine()) {
             String word = engine.getLineWord();
             for (int i = 0; i < size; i++)
                 fields[row][i].setText(word.substring(i, i+1).toUpperCase());
+            for (int i = 0; i < size; i++)
+                fields[row][i].setWidth(width);
             markLine (engine.getLine());
             row += 1;
         }
