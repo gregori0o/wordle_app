@@ -16,7 +16,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
     private View binding;
 
-
     public MainFragment() {}
 
     @Override

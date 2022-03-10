@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 
 public class InstructionFragment extends Fragment {
 
-
     public InstructionFragment() { }
 
     @Override

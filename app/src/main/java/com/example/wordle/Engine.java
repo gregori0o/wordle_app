@@ -17,11 +17,9 @@ public class Engine {
     private int[] line;
     private HashMap<Character, Integer> alphabet;
     private final String letters = "qwertyuiopasdfghjklzxcvbnmąćęłóśńżź";
-
     private boolean is_saved;
     private int num_line = 1;
     private String[] lines;
-
     private File file;
 
     public Engine (Context c, int length) {
